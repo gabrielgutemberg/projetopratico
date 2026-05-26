@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="assets/styles.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -23,14 +23,15 @@ Ranking</li>
         </nav>
     </header>
     <div class = "principal">
-        <h1>ranking de albums CRUD PDO</h1>
-        <p>Sistema web desenvolvido para o gerenciamento e classificação de álbuns musicais, permitindo que usuários cadastrem obras, artistas, gêneros e avaliações em uma plataforma organizada e intuitiva. O projeto utiliza operações CRUD para possibilitar o cadastro, edição, visualização e remoção de informações, além de oferecer um sistema de ranking baseado nas notas atribuídas aos álbuns. A aplicação tem como objetivo facilitar a organização de coleções musicais pessoais e proporcionar uma experiência inspirada em plataformas de avaliação e catálogo de música.</p>
+        <h1>Sistema Ranking de <strong>Albums</strong></h1>
+        <p>Sistema web para catalogação e classificação musical. Gerencia álbuns, artistas e gêneros via operações CRUD, contando com uma interface intuitiva e um sistema integrado de ranking por avaliações.</p>
         <div>
             <img class = "capaalbum" src="assets/cgbh.jpg" alt="childish">
             <img class = "capaalbum" src="assets/theweeknd.jpg"alt = "theweeknd">
             <img class = "capaalbum" src="assets/mjbh.jpg" alt="michael">
             <img class = "capaalbum" src="assets/neymar.jpg" alt="neymar">
         </div>
+        <p class = "botaocima">Clique aqui para ver o rank/rankear</p>
         <button class = "botao">Rankear</button>
     </div>
 </body>
