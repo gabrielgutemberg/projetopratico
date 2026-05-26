@@ -46,6 +46,7 @@ header nav ul{
 }
 .principal{
     background-color: white;
+    width: 95%;
     padding: 3%;
     border-radius: 7px;
     margin: 0.5% 4% 0.5% 4%;
@@ -53,7 +54,7 @@ header nav ul{
     flex-direction: column;
     height: 100vh;
     justify-self: center;
-    align-items: center;
+    align-items: stretch;
     font-family: "Google Sans", sans-serif;
 }
 .capaalbum{
@@ -89,4 +90,38 @@ header nav ul{
     margin-left: 100px;
     margin-right: 100px;
     text-align: center;
+}
+
+.botaoAdd {
+    padding: 10px;
+    background-color: #4495ff;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: 0.2s;
+    color: white;
+    font-family: "Archivo Black", sans-serif;
+    margin-bottom: 20px;
+}
+.botaoAdd:hover {
+    background-color: #b3d4ff;}
+.botaoAdd:active {
+    background-color: #094ea8;
+}
+
+.principal div h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.topo {
+    width: 100%;
+    display: block;    
+    text-align: center; 
+    margin-bottom: 40px;
+}
+
+.topo .botaoAdd {
+    display: block;     
+    margin-left: 0;     
+    margin-right: auto; 
+    margin-bottom: 20px; 
 }
