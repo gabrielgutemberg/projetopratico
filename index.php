@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ranking de Álbuns - Home</title>
-    <link rel="stylesheet" href="assets/styles.css?v=1">
+    <link rel="stylesheet" href="assets/styles.css?v=5">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">

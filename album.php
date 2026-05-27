@@ -1,9 +1,17 @@
+<?php
+    class Album{
+        private $conexao;
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Ranking de Álbuns - Home</title>
-    <link rel="stylesheet" href="assets/styles.css?v=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar</title>
+    <link rel="stylesheet" href="assets/styles.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
@@ -21,25 +29,8 @@
         </ul>
         </nav>
     </header>
-    <div class = "principal">
-        <div class = "topo">
-            <h1>Ranking</strong></h1>
-            <a href="album.php"><button class = "botaoAdd" >Adicionar album ao rank</button></a>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Capa</th>
-                    <th>Nota</th>
-                    <th>Titulo</th>
-                    <th>Artista</th>
-                    <th>Genero</th>
-                    <th>Ano</th>
-                    <th>Faixas</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-        </table>
+    <div class = "principal-album">
+        <h1>Adicioddddnar ao <strong>Ranking</strong></h1>
     </div>
 </body>
 </html>
