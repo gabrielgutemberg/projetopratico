@@ -1,6 +1,27 @@
 <?php
-    class Album{
+require_once("pdo.php");
+    class gerenciarAlbum{
         private $conexao;
+        public function __construct($conexao){
+            $this->conexao = $conexao;
+        }
+        public function inserir($capa,$nota,$titulo,$genero,$artista,$ano,$faixas){
+            try{
+                $sql = "INSERT INTO albuns (capa, nota, titulo, artista, genero, ano, faixas) VALUES (:capa, :nota, :titulo, :artista, :genero, :ano, :faixas);";
+                $stmt = $this->conexao->prepare($sql);
+                return $stmt->execute([
+                    ':capa'=> $capa,
+                    ':nota'=> $nota,
+                    ':titulo'=> $titulo,
+                    ':artista'=> $artista,
+                    ':genero'=> $genero,
+                    ':ano' => $ano,
+                    ':faixas'=> $faixas
+                ]);
+            } catch(PDOException $e){
+                die("Erro ao salvar no banco: ". $e->getMessage());
+            }
+        }
     }
 ?>
 
@@ -31,6 +52,9 @@
     </header>
     <div class = "principal-album">
         <h1>Adicioddddnar ao <strong>Ranking</strong></h1>
+        <div>
+
+        </div>
     </div>
 </body>
 </html>
