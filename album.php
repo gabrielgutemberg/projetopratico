@@ -7,7 +7,7 @@ require_once("pdo.php");
         }
         public function inserir($capa,$nota,$titulo,$genero,$artista,$ano,$faixas){
             try{
-                $sql = "INSERT INTO albuns (capa, nota, titulo, artista, genero, ano, faixas) VALUES (:capa, :nota, :titulo, :artista, :genero, :ano, :faixas);";
+                $sql = "INSERT INTO albums (capa, nota, titulo, artista, genero, ano, faixas) VALUES (:capa, :nota, :titulo, :artista, :genero, :ano, :faixas);";
                 $stmt = $this->conexao->prepare($sql);
                 return $stmt->execute([
                     ':capa'=> $capa,
@@ -22,9 +22,84 @@ require_once("pdo.php");
                 die("Erro ao salvar no banco: ". $e->getMessage());
             }
         }
-    }
-?>
+        public function atualizar($id, $capa, $nota, $titulo, $artista, $genero, $ano, $faixas) {
+        try {
+            $sql = "UPDATE albums SET 
+                        capa = :capa, 
+                        nota = :nota, 
+                        titulo = :titulo, 
+                        artista = :artista, 
+                        genero = :genero, 
+                        ano = :ano, 
+                        faixas = :faixas 
+                    WHERE id = :id";
+            
+            $stmt = $this->conexao->prepare($sql);
+            return $stmt->execute([
+                ':id'      => $id,
+                ':capa'    => $capa,
+                ':nota'    => $nota,
+                ':titulo'  => $titulo,
+                ':artista' => $artista,
+                ':genero'  => $genero,
+                ':ano'     => $ano,
+                ':faixas'  => $faixas
+            ]);
+            } catch (PDOException $e) {
+                die("Erro ao atualizar álbum: " . $e->getMessage());
+            }
+        }
 
+    // 5. FUNÇÃO PARA DELETAR (D DO CRUD)
+        public function deletar($id) {
+            try {
+                $sql = "DELETE FROM albums WHERE id = :id";
+                $stmt = $this->conexao->prepare($sql);
+                return $stmt->execute([':id' => $id]);
+            } catch (PDOException $e) {
+                die("Erro ao deletar álbum: " . $e->getMessage());
+            }
+        }
+        public function buscarPorId($id) {
+            try {
+                $sql = "SELECT * FROM albums WHERE id = :id";
+                $stmt = $this->conexao->prepare($sql);
+                $stmt->execute([':id' => $id]);
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("Erro ao buscar álbum: " . $e->getMessage());
+            }
+        }
+        public function imprimir() {
+            try {
+                $sql = "SELECT * FROM albums ORDER BY nota DESC";
+                $stmt = $this->conexao->query($sql);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("Erro ao listar álbuns: " . $e->getMessage());
+            }
+        }
+    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar']) && isset($_POST['titulo'])) {
+    
+    $albumGerenciar = new gerenciarAlbum($pdo);
+
+    $sucesso = $albumGerenciar->inserir(
+        $_POST['capa'], 
+        $_POST['nota'],
+        $_POST['titulo'],
+        $_POST['genero'],
+        $_POST['artista'],
+        $_POST['ano'],
+        $_POST['faixas']
+    );
+
+    if ($sucesso) {
+        header("Location: ranking.php");
+        exit();
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -32,7 +107,7 @@ require_once("pdo.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar</title>
-    <link rel="stylesheet" href="assets/styles.css?v=1">
+    <link rel="stylesheet" href="assets/styles.css?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
@@ -51,9 +126,40 @@ require_once("pdo.php");
         </nav>
     </header>
     <div class = "principal-album">
-        <h1>Adicioddddnar ao <strong>Ranking</strong></h1>
-        <div>
-
+        <h1>Adicionar ao <strong>Ranking</strong></h1>
+        <br>
+        <div class = "formularioDiv">
+            <form method ="POST">
+                <div>
+                    <label>Link da Imagem da Capa (URL):</label>
+                    <input type="url" name="capa">
+                </div>
+                <div>
+                    <label>Nota:</label>
+                    <input type="number" name="nota" min="0" max="10" step="1" required>
+                </div>
+                <div>
+                    <label>Nome do Album:</label>
+                    <input type="text" name="titulo">
+                </div>
+                <div>
+                    <label>Nome do Artista:</label>
+                    <input type="text" name="artista">
+                </div>
+                <div>
+                    <label>Genero:</label>
+                    <input type="text" name="genero">
+                </div>
+                <div>
+                    <label>Ano de Lançamento:</label>
+                    <input type="number" min="1800" max="2026" step="1" name="ano" required>
+                </div>
+                <div>
+                    <label>Quantidade de Faixas:</label>
+                    <input type="number" min="1" step="1" name="faixas" required>
+                </div>
+                <button type="submit" name="cadastrar" class="botaoSalvar">ADICIONAR</button>
+            </form>
         </div>
     </div>
 </body>

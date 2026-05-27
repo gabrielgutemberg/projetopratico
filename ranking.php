@@ -1,3 +1,10 @@
+<?php
+require_once("pdo.php");
+require_once("album.php"); 
+
+$albumGerenciar = new gerenciarAlbum($pdo);
+$listaAlbuns = $albumGerenciar->imprimir();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

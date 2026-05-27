@@ -61,7 +61,8 @@ header nav ul{
     background-color: white;
 }
 .principal-album{
-    background-color: gray;
+    background-color: #d6d6d6;
+    max-width: 500px
 }
 .capaalbum{
     width: 200px;
@@ -137,4 +138,31 @@ header nav ul{
     text-align: center !important;
     margin: 30px auto !important;
     width: max-content !important;
+}
+
+form div {
+    display: flex;
+    flex-direction: column; 
+    gap: 6px;               
+    margin-bottom: 15px;    
+}
+
+form div label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+.botaoSalvar {
+    padding: 10px;
+    background-color: gray;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.botaoSalvar:hover {
+    background-color: #eeeeee;}
+.botaoSalvar:active {
+    background-color: #3a3838;
 }
