@@ -166,3 +166,9 @@ form div label {
 .botaoSalvar:active {
     background-color: #3a3838;
 }
+
+.descricao{
+    text-align: center; 
+    padding: 20px; 
+    color: #666;
+}

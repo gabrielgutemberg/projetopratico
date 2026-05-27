@@ -3,6 +3,40 @@ require_once("pdo.php");
 require_once("album.php"); 
 
 $albumGerenciar = new gerenciarAlbum($pdo);
+
+if (isset($_GET['id']) && isset($_GET['acao']) && $_GET['acao'] === 'deletar') {
+    $id = (int)$_GET['id'];
+    $sucesso = $albumGerenciar->deletar($id);
+    if ($sucesso) {
+        header("Location: ranking.php");
+        exit();
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar'])) {
+    $id = (int)$_POST['id'];
+    $sucesso = $albumGerenciar->atualizar(
+        $id,
+        $_POST['capa'], 
+        $_POST['nota'],
+        $_POST['titulo'],
+        $_POST['artista'],
+        $_POST['genero'],
+        $_POST['ano'],
+        $_POST['faixas']
+    );
+    if ($sucesso) {
+        header("Location: ranking.php");
+        exit();
+    }
+}
+
+$albumEmEdicao = null;
+if (isset($_GET['id']) && isset($_GET['acao']) && $_GET['acao'] === 'editar') {
+    $id = (int)$_GET['id'];
+    $albumEmEdicao = $albumGerenciar->buscarPorId($id);
+}
+
 $listaAlbuns = $albumGerenciar->imprimir();
 ?>
 <!DOCTYPE html>
@@ -46,6 +80,33 @@ $listaAlbuns = $albumGerenciar->imprimir();
                     <th>Ações</th>
                 </tr>
             </thead>
+            <tbody>
+                <?php if (!empty($listaAlbuns)): ?>
+                    <?php foreach ($listaAlbuns as $album): ?>
+                        <tr>
+                            <td>
+                                <img src="<?php echo htmlspecialchars($album['capa']); ?>" alt="Capa" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            </td>
+                            <td><strong><?php echo htmlspecialchars($album['nota']); ?></strong>/10</td>
+                            <td><?php echo htmlspecialchars($album['titulo']); ?></td>
+                            <td><?php echo htmlspecialchars($album['artista']); ?></td>
+                            <td><?php echo htmlspecialchars($album['genero']); ?></td>
+                            <td><?php echo htmlspecialchars($album['ano']); ?></td>
+                            <td><?php echo htmlspecialchars($album['faixas']); ?></td>
+                            <td>
+                                <div class="acoes-botoes">
+                                    <a href="ranking.php?acao=editar&id=<?php echo $album['id']; ?>" class="botao-editar">Editar</a>
+                                    <a href="ranking.php?acao=deletar&id=<?php echo $album['id']; ?>" class="botao-deletar">Deletar</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="8">Nenhum álbum cadastrado ainda.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
         </table>
     </div>
 </body>

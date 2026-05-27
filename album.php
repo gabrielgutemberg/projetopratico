@@ -99,6 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar']) && isset
         exit();
     }
 }
+
+if (basename($_SERVER['PHP_SELF']) === 'ranking.php') {
+    return;
+}
+
 ?>
 
 <!DOCTYPE html>
